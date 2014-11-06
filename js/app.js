@@ -1,3 +1,3 @@
 'use strict';
 
-var skeletonApp = angular.module('skeletonApp', []);
+var skeletonApp = angular.module('skeletonApp', ['ngRoute']);
