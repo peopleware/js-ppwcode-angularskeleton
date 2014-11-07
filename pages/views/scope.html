@@ -1,0 +1,15 @@
+<div class="view">
+    <div class="bold">Simple scope variable binding: </div>
+    <!-- Points to $scope.helloworld in userController.js -->
+    {{helloworld}}
+
+    <div class="bold">Simple ng-repeat:</div>
+    <div ng-repeat="user in users">
+        {{user.firstname}} {{user.lastname}}
+    </div>
+
+    <div class="bold">Simple ng-repeat, read from json file:</div>
+    <div ng-repeat="user in readUsersFromJson">
+        {{user.firstname}} {{user.lastname}}
+    </div>
+</div>

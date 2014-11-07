@@ -1,12 +1,15 @@
 'use strict';
 
 skeletonApp.config(function($routeProvider){
-    console.log("hier ben ik");
     $routeProvider
-        .when('/home', {
-            templateUrl: 'partials/welcome.html'
+        .when('/scope', {
+            templateUrl: 'pages/views/scope.html',
+            controller: 'userController'
+        })
+        .when('/form', {
+            templateUrl: 'pages/views/form.html'
         })
         .otherwise({
-            redirectTo: '/home'
+            redirectTo: '/scope'
         })
 });
