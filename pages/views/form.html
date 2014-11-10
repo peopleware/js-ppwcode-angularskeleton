@@ -1,82 +1,16 @@
-<div class="view">
-    <h1>Form examples</h1>
-    <form name="form" novalidate ng-submit="createUser()">
+<div class="container">
+
+    <div class="col-md-9">
+        <h1>Form examples</h1>
+
+        <div ng-include="formlink"></div>
+    </div>
+    <div class="col-md-3">
         <div>
-            <label>
-                Given name:
-                <input type="text"
-                       placeholder="Enter given name"
-                       ng-pattern="/^(?!.*[.]{2})[a-zA-Z0-9_.'-]+[^<>+]+$/"
-                       ng-minlength="3"
-                       ng-maxlength="60"
-                       ng-model="user.givenname"
-                       ng-class="{submitted:givenname.submitted}"
-                       name="givenname"
-                       required/>
-                        <span class="error" ng-show="form.givenname.$dirty && form.givenname.$invalid">
-                            <span ng-show="form.givenname.$error.pattern">Using illegal characters</span>
-                            <span ng-show="form.givenname.$error.required">Name is required</span>
-                            <span ng-show="form.givenname.$error.minlength">Name is too short</span>
-                            <span ng-show="form.givenname.$error.maxlength">Name is too long</span>
-                        </span>
-                <span ng-show="form.$submitted">Submitted?</span>
-            </label>
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+                <li role="presentation" class="active"><a href ng-click="changePage('basicform')">Basic</a></li>
+                <li role="presentation"><a href ng-click="changePage('validationform')">Validation</a></li>
+            </ul>
         </div>
-        <div>
-            <label>
-                Family name:
-                <input type="text"
-                       placeholder="Enter family name"
-                       ng-pattern="/^(?!.*[.]{2})[a-zA-Z0-9_.'-]+[^<>+]+$/"
-                       ng-minlength="3"
-                       ng-maxlength="60"
-                       ng-model="user.familyname"
-                       ng-class="{submitted:familyname.submitted}"
-                       name="familyname" required/>
-                        <span class="error" ng-show="form.familyname.$dirty && form.familyname.$invalid">
-                            <span ng-show="form.familyname.$error.pattern">Using illegal characters</span>
-                            <span ng-show="form.familyname.$error.required">Family name is required</span>
-                            <span ng-show="form.familyname.$error.minlength">Family name is too short</span>
-                            <span ng-show="form.familyname.$error.maxlength">Family name is too long</span>
-                        </span>
-            </label>
-        </div>
-        <div>
-            <label>
-                Email:
-                <input type="email"
-                       ng-model="user.email"
-                       placeholder="Enter email"
-                       name="email"
-                       required/>
-                        <span class="error" ng-show="form.email.$dirty && form.email.$invalid">
-                            <span ng-show="form.email.$error.required">Email is required</span>
-                            <span ng-show="form.email.$error.email">Not a valid email</span>
-                        </span>
-            </label>
-        </div>
-        <div>
-            <label>
-                Alias:
-                <input type="email"
-                       ng-model="user.alias"
-                       ng-disabled="true"/>
-            </label>
-        </div>
-        <div>
-            <label>
-                Password:
-                <input type="text"
-                       placeholder="Enter password"
-                       ng-model="user.password" name="password"
-                       required/>
-                        <span class="error" ng-show="form.password.$dirty && form.password.$invalid">
-                            <span ng-show="form.password.$error.required">Password is required</span>
-                            <span ng-show="form.password.$error.pattern">Using illegal characters</span>
-                        </span>
-            </label>
-        </div>
-        <button type="submit" ng-disabled="form.$invalid">Create user</button>
-        <div class="error" ng-show="error != null"><span>{{error}}</span></div>
-    </form>
+    </div>
 </div>

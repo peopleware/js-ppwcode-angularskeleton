@@ -6,8 +6,9 @@ skeletonApp.config(function($routeProvider){
             templateUrl: 'pages/views/scope.html',
             controller: 'userController'
         })
-        .when('/form', {
-            templateUrl: 'pages/views/form.html'
+        .when('/forms', {
+            templateUrl: 'pages/views/form.html',
+            controller: 'userController'
         })
         .otherwise({
             redirectTo: '/scope'

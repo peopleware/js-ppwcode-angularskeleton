@@ -1,0 +1,62 @@
+<h2>Standard form with validation</h2>
+
+<form name="form" novalidate ng-submit="createUser()">
+
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="form-group">
+                <label class="control-label">Given name:</label>
+                <input type="text"
+                       placeholder="Enter given name"
+                       ng-model="user.givenname"
+                       name="givenname"
+                       class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Family name:</label>
+                <input type="text"
+                       placeholder="Enter family name: "
+                       ng-model="user.familyname"
+                       class="form-control"
+                       name="familyname"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="form-group">
+                <label class="control-label">Email:</label>
+                <input type="email"
+                       ng-model="user.email"
+                       placeholder="Enter email"
+                       name="email"
+                       class="form-control"/>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Alias:</label>
+                <input type="email"
+                       ng-model="user.alias"
+                       class="form-control"
+                       ng-disabled="true"
+                       placeholder=""
+                       name="alias"/>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label"> Password:</label>
+                <input type="text"
+                       placeholder="Enter password"
+                       ng-model="user.password"
+                       name="password"
+                       class="form-control"/>
+            </div>
+
+            <button class="btn btn-default" type="submit">Create user</button>
+            <div class="error" ng-show="error != null"><span>{{error}}</span></div>
+        </div>
+    </div>
+</form>
