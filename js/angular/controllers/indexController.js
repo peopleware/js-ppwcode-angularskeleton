@@ -3,6 +3,7 @@
 skeletonApp.controller('indexController', function ($scope) {
     $scope.navlink = 'pages/partials/navigation.html';
     $scope.formlink = 'pages/partials/forms/basic.html';
+    $scope.modallink = 'pages/partials/modals.html';
 
     $scope.changePage = function(destination){
         switch(destination){

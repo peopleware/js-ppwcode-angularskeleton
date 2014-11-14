@@ -1,62 +1,187 @@
 <h2>Standard form with validation</h2>
 
-<form name="form" novalidate ng-submit="createUser()">
+<form role="form" name="form" novalidate ng-submit="createUser()">
+    <div class="form-group" ng-class="{'has-error': form.givenname.$invalid && form.givenname.$dirty}">
+        <label>Given name:</label>
+        <input type="text"
+               placeholder="Enter given name"
+               class="form-control"
+               ng-pattern="/^(?!.*[.]{2})[a-zA-Z0-9_.'-]+[^<>+]+$/"
+               ng-minlength="3"
+               ng-maxlength="60"
+               ng-model="user.givenName"
+               name="givenname"
+               required/>
+                        <span ng-show="form.givenname.$dirty && form.givenname.$invalid">
+                            <span ng-show="form.givenname.$error.required" class="help-block">Name is required</span>
+                            <span ng-show="form.givenname.$error.minlength" class="help-block">Name is too short</span>
+                            <span ng-show="form.givenname.$error.maxlength" class="help-block">Name is too long</span>
+                            <span ng-show="form.givenname.$error.pattern"
+                                  class="help-block">Using illegal characters</span>
+                        </span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': form.familyname.$invalid && form.familyname.$dirty}">
+        <label>Family name:</label>
+        <input type="text"
+               placeholder="Enter family name"
+               class="form-control"
+               ng-pattern="/^(?!.*[.]{2})[a-zA-Z0-9_.'-]+[^<>+]+$/"
+               ng-minlength="3"
+               ng-maxlength="60"
+               ng-model="user.familyName"
+               name="familyname" required/>
+                        <span class="error" ng-show="form.familyname.$dirty && form.familyname.$invalid">
+                            <span ng-show="form.familyname.$error.required"
+                                  class="help-block">Family name is required</span>
+                            <span ng-show="form.familyname.$error.minlength"
+                                  class="help-block">Family name is too short</span>
+                            <span ng-show="form.familyname.$error.maxlength"
+                                  class="help-block">Family name is too long</span>
+                            <span ng-show="form.familyname.$error.pattern"
+                                  class="help-block">Using illegal characters</span>
+                        </span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': form.email.$invalid && form.email.$dirty}">
+        <label>Email:</label>
+        <input type="email"
+               ng-model="user.email"
+               placeholder="Enter email"
+               class="form-control"
+               name="email"
+               required/>
+            <span class="error" ng-show="form.email.$dirty && form.email.$invalid">
+                <span ng-show="form.email.$error.required" class="help-inline">Email is required</span>
+                <span ng-show="form.email.$error.email" class="help-inline">Not a valid email</span>
+            </span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': form.alias.$invalid && form.alias.$dirty}">
+        <label>Alias:</label>
+        <input type="email"
+               class="form-control"
+               ng-model="user.alias"
+               ng-disabled="true"/>
+    </div>
+    <div class="form-group" ng-class="{'has-error': form.password.$invalid && form.password.$dirty}">
+        <label>Password:</label>
+        <input type="text"
+               placeholder="Enter password"
+               class="form-control"
+               ng-model="user.password" name="password"
+               required/>
+                        <span class="error" ng-show="form.password.$dirty && form.password.$invalid">
+                            <span ng-show="form.password.$error.required" class="help-block">Password is required</span>
+                            <span ng-show="form.password.$error.pattern"
+                                  class="help-block">Using illegal characters</span>
+                        </span>
+    </div>
+    <div class="form-group">
+        <label>Groups:</label>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <div class="form-group">
-                <label class="control-label">Given name:</label>
-                <input type="text"
-                       placeholder="Enter given name"
-                       ng-model="user.givenname"
-                       name="givenname"
-                       class="form-control"/>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label">Family name:</label>
-                <input type="text"
-                       placeholder="Enter family name: "
-                       ng-model="user.familyname"
-                       class="form-control"
-                       name="familyname"/>
-            </div>
-        </div>
+        <div multi-select
+             input-model="groups"
+             output-model="selectedGroups"
+             button-label="name"
+             item-label="name"
+             tick-property="ticked"
+             helper-elements="none"></div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <div class="form-group">
-                <label class="control-label">Email:</label>
-                <input type="email"
-                       ng-model="user.email"
-                       placeholder="Enter email"
-                       name="email"
-                       class="form-control"/>
-            </div>
-
-
-            <div class="form-group">
-                <label class="control-label">Alias:</label>
-                <input type="email"
-                       ng-model="user.alias"
-                       class="form-control"
-                       ng-disabled="true"
-                       placeholder=""
-                       name="alias"/>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label"> Password:</label>
-                <input type="text"
-                       placeholder="Enter password"
-                       ng-model="user.password"
-                       name="password"
-                       class="form-control"/>
-            </div>
-
-            <button class="btn btn-default" type="submit">Create user</button>
-            <div class="error" ng-show="error != null"><span>{{error}}</span></div>
-        </div>
-    </div>
+    <button class="form-button" type="submit" ng-disabled="form.$invalid">Create user</button>
+    <div class="error" ng-show="error != null"><span>{{error}}</span></div>
 </form>
+
+        <!--
+<form name="form" role="form" novalidate ng-submit="createUser()">
+    <div class="row">
+        <div class="form-group col-md-8" ng-class="{'has-error': form.email.$invalid && form.email.$dirty}">
+            <label>Given name:</label>
+            <input type="text"
+                   placeholder="Enter given name"
+                   ng-model="user.givenname"
+                   name="givenname"
+                   class="form-control"
+                   ng-pattern="/^(?!.*[.]{2})[a-zA-Z0-9_.'-]+[^<>+]+$/"
+                   ng-minlength="3"
+                   ng-maxlength="60"
+                   required/>
+        </div>
+        <div class="col-md-4">
+        <span ng-show="form.givenname.$dirty && form.givenname.$invalid">
+            <span ng-show="form.givenname.$error.required" class="help-block">Name is required</span>
+            <span ng-show="form.givenname.$error.minlength" class="help-block">Name is too short</span>
+            <span ng-show="form.givenname.$error.maxlength" class="help-block">Name is too long</span>
+            <span ng-show="form.givenname.$error.pattern" class="help-block">Using illegal characters</span>
+        </span>
+        </div>
+
+        <div class="form-group col-md-8" ng-class="{'has-error': form.email.$invalid && form.email.$dirty}">
+            <label>Family name:</label>
+            <input type="text"
+                   placeholder="Enter family name: "
+                   ng-model="user.familyname"
+                   class="form-control"
+                   name="familyname"
+                   ng-pattern="/^(?!.*[.]{2})[a-zA-Z0-9_.'-]+[^<>+]+$/"
+                   ng-minlength="3"
+                   ng-maxlength="60"
+                   required/>
+        </div>
+        <div class="col-md-4">
+                           <span class="error" ng-show="form.familyname.$dirty && form.familyname.$invalid">
+                            <span ng-show="form.familyname.$error.required"
+                                  class="help-block">Family name is required</span>
+                            <span ng-show="form.familyname.$error.minlength"
+                                  class="help-block">Family name is too short</span>
+                            <span ng-show="form.familyname.$error.maxlength"
+                                  class="help-block">Family name is too long</span>
+                            <span ng-show="form.familyname.$error.pattern"
+                                  class="help-block">Using illegal characters</span>
+                        </span>
+        </div>
+
+        <div class="form-group col-md-8" ng-class="{'has-error': form.email.$invalid && form.email.$dirty}">
+            <label>Email:</label>
+            <input type="email"
+                   ng-model="user.email"
+                   placeholder="Enter email"
+                   name="email"
+                   class="form-control"
+                   required/>
+        </div>
+        <div class=col-md-4>
+            <span class="error" ng-show="form.email.$dirty && form.email.$invalid">
+                <span ng-show="form.email.$error.required" class="help-inline">Email is required</span>
+                <span ng-show="form.email.$error.email" class="help-inline">Not a valid email</span>
+            </span>
+        </div>
+
+        <div class="form-group col-md-8" ng-class="{'has-error': form.email.$invalid && form.email.$dirty}">
+            <label>Alias:</label>
+            <input type="email"
+                   ng-model="user.alias"
+                   class="form-control"
+                   ng-disabled="true"
+                   placeholder=""
+                   name="alias"/>
+        </div>
+
+        <div class="form-group col-md-8" ng-class="{'has-error': form.email.$invalid && form.email.$dirty}">
+            <label> Password:</label>
+            <input type="password"
+                   placeholder="Enter password"
+                   ng-model="user.password"
+                   name="password"
+                   class="form-control"
+                   required/>
+        </div>
+        <div class="col-md-4">
+                               <span class="error" ng-show="form.password.$dirty && form.password.$invalid">
+                            <span ng-show="form.password.$error.required" class="help-block">Password is required</span>
+                            <span ng-show="form.password.$error.pattern"
+                                  class="help-block">Using illegal characters</span>
+                        </span>
+        </div>
+    </div>
+    <button class="btn btn-default" type="submit">Create user</button>
+</form>
+        -->

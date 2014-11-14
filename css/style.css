@@ -8,3 +8,11 @@ green: #7AC142
 body {
     padding-top: 70px;
 }
+
+.error {
+    color: #ff0000;
+}
+
+.test {
+    overflow-y: scroll;
+}
